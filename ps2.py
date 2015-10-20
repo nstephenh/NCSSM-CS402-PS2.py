@@ -35,15 +35,22 @@ print("pass fibToMe(3) == 12" if (fibToMe(3) == 12) else "fail fibToMe(2) == 12 
 
 #2
 def specialSum(n):
-    """precondition: n is a positive integer.
+	"""precondition: n is a positive integer.
 postconditions: return the sum of all integers 1 to n (inclusive) divisible by 
 2 or 3, but not 5.
 specialSum(10) -> 32
 specialSum(20) -> 92
 """
-    return 0
+	summe = []
+	for num in range(1, n+1):
+		if (num%2 == 0 or num%3 == 0) and num%5 != 0:
+			summe.append(num)
+	#print(summe)
+	return sum(summe)
 
-
+print("pass specialSum(10) == 32" if (specialSum(10) == 32) else "fail specialSum(10) == 32 returns " + str(specialSum(10)))
+print("pass specialSum(20) == 92" if (specialSum(20) == 92) else "fail specialSum(20) == 92 returns " + str(specialSum(20)))
+print("pass specialSum(12) == 44" if (specialSum(12) == 44) else "fail specialSum(12) == 44 returns " + str(specialSum(12)))
 #3
 def fileContains(filename, word, recurse=False):
     """precondition:  filename and word are strings.
