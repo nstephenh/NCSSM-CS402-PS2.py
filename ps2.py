@@ -8,6 +8,7 @@
 ##########################################
 import os            ##You will want these for access
 import os.path       ##to the file system. See the documentation 
+import re
 
 #1
 def fibToMe(l):
@@ -53,7 +54,7 @@ print("pass specialSum(20) == 92" if (specialSum(20) == 92) else "fail specialSu
 print("pass specialSum(12) == 44" if (specialSum(12) == 44) else "fail specialSum(12) == 44 returns " + str(specialSum(12)))
 #3
 def fileContains(filename, word, recurse=False):
-    """precondition:  filename and word are strings.
+	"""precondition:  filename and word are strings.
 postcondition:  If the file filename is a directory, inspect the contents of 
 all files in the directory and return True if word appears in any of them.
 If the filename is a regular file and if the string word is found in the 
@@ -62,9 +63,30 @@ If the file filename does not exist, return False
 Otherwise, return False
 ##Challenge: implement the recurse option to recursively check files in 
 subdirectories if recurse is True
-    """
-    return False
-
+"""
+	pattern = re.compile(word)
+	
+	if os.path.isdir(filename):
+		#inspect all files in the directory
+		for item in os.listdir(filename):
+			try:
+				if (pattern.match(line) for line in open(filename + '/' + item))!= None:
+					return True
+				
+			except IsADirectoryError:
+				if recurse:
+					if fileContains(item, word, True) == True:
+						return True
+	else:
+		try:
+			if (pattern.match(line) for line in open(filename))!= None:
+				return True
+		except FileNotFoundError:
+			return False	
+	
+print("word found" if fileContains(".", "precondition:") else "failure to find ")
+print("word found recursivly" if fileContains("..", "precondition:", True) else "failure to find")
+print("word that wasn't supposed to be found not found recursivly" if fileContains("/tmp", "turkeychickenfdfdsale", True) else "failure to not find")
 
 #4
 def countFilesWithExtension(directory, extension):
