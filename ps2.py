@@ -90,14 +90,25 @@ print("word that wasn't supposed to be found not found recursivly" if fileContai
 
 #4
 def countFilesWithExtension(directory, extension):
-    """prec: directory is a string, extension is a string.
+	"""prec: directory is a string, extension is a string.
 postc:  return a -1 if the directory does not exist.
 Otherwise return a count of all files in the directory with extension
 .extension (be nice to the user...  prepend a '.' if they omit it.  if they 
 include it, do not double it)
-"""
-    return 0
+"""	
+	count = 0
+	if extension[0] != ".":
+		extension = "." + extension
+	if os.path.isdir(directory):
+		for item in os.listdir(directory):
+			if item.endswith(extension) == True:
+				count +=1
+	else:
+		return(-1)
+	return count
 
+print(str(countFilesWithExtension(".", ".py")) + " .py file found in the current directory")
+print(str(countFilesWithExtension(".", "py")) + " py file found in the current directory. I added a dot for you")
 
 #5
 def assort(counts):
