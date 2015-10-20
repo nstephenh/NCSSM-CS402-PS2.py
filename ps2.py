@@ -11,7 +11,7 @@ import os.path       ##to the file system. See the documentation
 
 #1
 def fibToMe(l):
-    """precondition: l is an integer
+	"""precondition: l is an integer
 postcondition: return the number in the fibonacci series which is the first 
 with l or more digits.
 fibonacci number: 0 1 1 2 3 5 8 13 21 34 55 89 144
@@ -19,7 +19,18 @@ number in series: 0 1 2 3 4 5 6 7  8  9  10 11 12
 fibToMe(2) -> 7
 fibToMe(3) -> 12
 """
-    return 0
+	fibsum = 1
+	fibsumprev = 0
+	pos = 1
+	while (len(str(fibsum)) <= l-1):
+		temp = fibsum
+		fibsum = fibsum + fibsumprev
+		fibsumprev = temp
+		pos +=1
+	return pos
+#test for 1
+print("pass fibToMe(2) == 7" if (fibToMe(2) == 7) else "fail fibToMe(2) == 7 returns " + str(fibToMe(2)) )
+print("pass fibToMe(3) == 12" if (fibToMe(3) == 12) else "fail fibToMe(2) == 12 returns " + str(fibToMe(3)) )
 
 
 #2
