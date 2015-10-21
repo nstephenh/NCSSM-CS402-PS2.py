@@ -112,20 +112,28 @@ print(str(countFilesWithExtension(".", "py")) + " py file found in the current d
 
 #5
 def assort(counts):
-    """prec:  counts is a dictionary whose keys are words
-    and whose values are positive integers.
-    postc:  return a dictionary whose keys are integers
-    and whose values are lists containing all words paired
-    with the integers, sorted alphbeticallly.  Here is an example
-    d = {"cat":3, "dog":1, "pig":1, "horse":3, "lemur":4}
-    assort(d) -> {1: ["dog", "pig"], 3:["cat", "dog"], 4:["lemur"]}
-    """
-    return {}
-
-
+	"""prec:  counts is a dictionary whose keys are words
+and whose values are positive integers.
+postc:  return a dictionary whose keys are integers
+and whose values are lists containing all words paired
+with the integers, sorted alphbeticallly.  Here is an example
+d = {"cat":3, "dog":1, "pig":1, "horse":3, "lemur":4}
+assort(d) -> {1: ["dog", "pig"], 3:["cat", "dog"], 4:["lemur"]}
+"""
+	assorted = {}
+	
+	keylist = list(counts.keys())
+	for key in keylist:
+		assorted[counts[key]] = []
+	for key in keylist:
+		assorted[counts[key]].append(key)
+		assorted[counts[key]].sort()
+	return assorted
+d = {"cat":3, "dog":1, "pig":1, "horse":3, "lemur":4}
+print( "Passorted" if assort(d) == {1: ["dog", "pig"], 3:["cat", "horse"], 4:["lemur"]} else "Failoreted:" + str(assort(d)))
 #6
 def aMatchMadeAtNCSSM(username):
-    """precondition: username is a valid username on the cs server (you can use
+	"""precondition: username is a valid username on the cs server (you can use
 your username to test)
 postcondition: return a list containing 1 or more valid usernames that share
 the most characters (apositionally) with the given username (duplicate letters
@@ -133,8 +141,15 @@ should only boost the count if they are duplicated in both names)
 You may use home directory names as a valid proxy for usernames.  Remember that
 user home directories live in: /home/ and associated subdirectories
 """ 
-    return []
+	chars = list(username)
+	print(chars)
 
+if 'nsh' in os.uname()[1]:
+	print("Noah Haskell's Computer, unable to test")
+else:
+	#actual test code
+	pass
+aMatchMadeAtNCSSM("haskell16n")
 
 #7
 def ionics(filename, gimmieGimmie, delim=","):
