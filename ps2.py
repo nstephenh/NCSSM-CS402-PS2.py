@@ -143,7 +143,7 @@ postcon: returns the number of characters in str2 that are in str1
 	for char in str1:
 		i = str2.find(char)
 		if i >=0:
-			str2.remove[i]
+			str2.pop(i)
 			closeness += 1
 	return closeness
 	
