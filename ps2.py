@@ -222,10 +222,25 @@ for line in open('sampleFile.csv.out'):
 	index +=1
 #7 Bonus
 def autoDetectDelimitor(filename):
-    """precondition: filename is a columnar file as above.
+	"""precondition: filename is a columnar file as above.
 postcondition: autodetect and return the single character delimitor to the best of your ability.
 if you are unable to detect, return None
 """
-    return None
+	statistics = {}
+	for line in open(filename):
+		for char in line:
+			if not char in statistics.keys():
+				statistics[char] = 1
+			else:
+				statistics[char] += 1
+	occurence = assort(statistics)
+	occurencekeys = list(occurence.keys())
+	occurencekeys.sort()
+	answer = occurence[occurencekeys[-1]]
+	if len(answer) != 1:
+		return None
+	else:
+		return answer[0]
 
+print(autoDetectDelimitor("sampleFile.csv"))
 
