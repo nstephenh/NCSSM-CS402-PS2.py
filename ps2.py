@@ -167,7 +167,6 @@ user home directories live in: /home/ and associated subdirectories
 		else:
 			closenessdict[uname] = ratecloseness(username, uname)
 	matchbook = assort(closenessdict)
-	print(matchbook)
 	for i in range(len(username), 0, -1):
 		if matchbook[i] != []:
 			return matchbook[i]
@@ -175,7 +174,7 @@ user home directories live in: /home/ and associated subdirectories
 if 'nsh' in os.uname()[1]:
 	print("Noah Haskell's Computer, unable to test")
 else:
-	aMatchMadeAtNCSSM("haskell16n")
+	print(aMatchMadeAtNCSSM("haskell16n"))
 
 #7
 def ionics(filename, gimmieGimmie, delim=","):
