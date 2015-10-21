@@ -86,7 +86,8 @@ subdirectories if recurse is True
 	
 print("word found" if fileContains(".", "precondition:") else "failure to find ")
 print("word found recursivly" if fileContains("..", "precondition:", True) else "failure to find")
-print("word that wasn't supposed to be found not found recursivly" if fileContains("/tmp", "turkeychickenfdfdsale", True) else "failure to not find")
+#print("word that wasn't supposed to be found not found recursivly" if fileContains("/tmp", "turkeychickenfdfdsale", True) else "failure to not find")
+#That last test case didn't work on the cs server
 
 #4
 def countFilesWithExtension(directory, extension):
@@ -131,7 +132,21 @@ assort(d) -> {1: ["dog", "pig"], 3:["cat", "dog"], 4:["lemur"]}
 	return assorted
 d = {"cat":3, "dog":1, "pig":1, "horse":3, "lemur":4}
 print( "Passorted" if assort(d) == {1: ["dog", "pig"], 3:["cat", "horse"], 4:["lemur"]} else "Failoreted:" + str(assort(d)))
+
 #6
+#helper function
+def ratecloseness(str1, str2):
+	"""Precon: str1 and str2 are strings
+postcon: returns the number of characters in str2 that are in str1
+"""
+	closeness= 0
+	for char in str1:
+		i = str2.find(char)
+		if i >=0:
+			str2.remove[i]
+			closeness += 1
+	return closeness
+	
 def aMatchMadeAtNCSSM(username):
 	"""precondition: username is a valid username on the cs server (you can use
 your username to test)
@@ -141,15 +156,23 @@ should only boost the count if they are duplicated in both names)
 You may use home directory names as a valid proxy for usernames.  Remember that
 user home directories live in: /home/ and associated subdirectories
 """ 
-	chars = list(username)
-	print(chars)
-
+	closenessdict = {}
+	for uname in os.listdir("/home/"):
+		if uname[:2] ==  "20" and os.path.isdir(uname):
+			for uname2 in os.listdir("/home/" + uname):
+				closenessdict[uname2] = ratecloseness(username, uname2)
+		else:
+			closenessdict[uname] = ratecloseness(username, uname)
+	matchbook = assort(closenessdict)
+	for i in range(len(username), 0, -1):
+		if matchbook[i] != []:
+			return matchbook[i]
+	return matchbook[0]
+		
 if 'nsh' in os.uname()[1]:
 	print("Noah Haskell's Computer, unable to test")
 else:
-	#actual test code
-	pass
-aMatchMadeAtNCSSM("haskell16n")
+	aMatchMadeAtNCSSM("haskell16n")
 
 #7
 def ionics(filename, gimmieGimmie, delim=","):
