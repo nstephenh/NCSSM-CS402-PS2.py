@@ -170,9 +170,10 @@ user home directories live in: /home/ and associated subdirectories
 			closenessdict[uname] = ratecloseness(username, uname)
 	matchbook = assort(closenessdict)
 	for i in range(len(username), 0, -1):
-		if matchbook[i] != []: #Really return my own username?
+		try:
 			return matchbook[i]
-		
+		except KeyError: #If we get keyerror then there isn't a value there
+			pass
 if 'nsh' in os.uname()[1]:
 	print("Noah Haskell's Computer, unable to test")
 else:
