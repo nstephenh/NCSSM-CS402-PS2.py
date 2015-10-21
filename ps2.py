@@ -168,7 +168,7 @@ user home directories live in: /home/ and associated subdirectories
 			closenessdict[uname] = ratecloseness(username, uname)
 	matchbook = assort(closenessdict)
 	for i in range(len(username), 0, -1):
-		if matchbook[i] != []:
+		if matchbook[i] != []: #Really return my own username?
 			return matchbook[i]
 		
 if 'nsh' in os.uname()[1]:
