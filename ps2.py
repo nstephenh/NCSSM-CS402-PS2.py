@@ -188,26 +188,38 @@ gimmieGimmie is a list of integers that are valid column numbers in the file.
 postcondition: create a file with the same name as the original with a ".out" 
 extension.  This file should contain the columns requested via gimmieGimmie,
 delimited by delim.
-sampleFile.csv:
-0,0,,1,1,0,
-1,2,3,4,5,6,7
-7,6,5,4,3,2,1
-cat,dog,bird,fish,rat,horse,cow
-this,that,other,another,else,further,farther
+Note: Text of opensampelfile.csv moved to seperate file
 
 ionics(sampleFile.csv, [2,4,6])
 will create this file
 sampleFile.csv.out
-,4,
+,1,
 3,5,7
 5,3,1
 bird,rat,cow
 other,else,farther
 """	
+	outputfile = open(filename + ".out", 'w')
 	for line in open(filename):
-		line.split[","]
+		output = []
+		for gim in gimmieGimmie:
+			output.append(line.split(",")[gim])
+		outputfile.write(','.join(output))
 		
-
+ionics("sampleFile.csv", [2,4,6])
+index = 0
+whatitshouldbe =[ ",1,",
+"3,5,7",
+"5,3,1",
+"bird,rat,cow",
+"other,else,farther"
+]
+for line in open('sampleFile.csv.out'):
+	if line.strip() != whatitshouldbe[index]:
+		print("Failure, " + line.strip() + " != " + whatitshouldbe[index])
+	else:
+		print("Pass on line "+ str(index))	
+	index +=1
 #7 Bonus
 def autoDetectDelimitor(filename):
     """precondition: filename is a columnar file as above.
