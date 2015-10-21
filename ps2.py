@@ -159,9 +159,11 @@ user home directories live in: /home/ and associated subdirectories
 	closenessdict = {}
 	for uname in os.listdir("/home/"):
 		if uname[:2] ==  "20" and os.path.isdir("/home/" + uname):
-			print("entering subdirectiry")
-			for uname2 in os.listdir("/home/" + uname):
-				closenessdict[uname2] = ratecloseness(username, uname2)
+			try:
+				for uname2 in os.listdir("/home/" + uname):
+					closenessdict[uname2] = ratecloseness(username, uname2)
+			except PermissionError:
+				closenessdict[uname] = ratecloseness(username, uname)
 		else:
 			closenessdict[uname] = ratecloseness(username, uname)
 	matchbook = assort(closenessdict)
