@@ -137,9 +137,11 @@ print( "Passorted" if assort(d) == {1: ["dog", "pig"], 3:["cat", "horse"], 4:["l
 #helper function
 def ratecloseness(str1, str2):
 	"""Precon: str1 and str2 are strings
-postcon: returns the number of characters in str2 that are in str1
+postcon: returns the number of characters in str2 that are in str1, unless they are the same string, then return -1
 """
 	closeness= 0
+	if str1 == str2:
+		return -1
 	for char in str1:
 		i = str2.find(char)
 		if i >=0:
@@ -178,7 +180,7 @@ else:
 
 #7
 def ionics(filename, gimmieGimmie, delim=","):
-    """precondition: filename is a valid filename.  filename's contents are 
+	"""precondition: filename is a valid filename.  filename's contents are 
 columnar data delimited by a character, delim (by default ',').  The columns 
 are numbered from 0 to n-1 (with n being the number of columns).
 gimmieGimmie is a list of integers that are valid column numbers in the file.
@@ -200,9 +202,10 @@ sampleFile.csv.out
 5,3,1
 bird,rat,cow
 other,else,farther
-"""
-    pass
-
+"""	
+	for line in open(filename):
+		line.split[","]
+		
 
 #7 Bonus
 def autoDetectDelimitor(filename):
